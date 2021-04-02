@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libMergeSorting.so -o libMergeSorting.so CMakeFiles/MergeSorting.dir/MergeSort.cpp.o 

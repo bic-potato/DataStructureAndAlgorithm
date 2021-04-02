@@ -1,0 +1,3 @@
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/cmake-build-debug/CMakeFiles/small.dir

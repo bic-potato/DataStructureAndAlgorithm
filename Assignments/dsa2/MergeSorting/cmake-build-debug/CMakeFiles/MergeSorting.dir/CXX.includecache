@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/MergeSorting/MergeSort.cpp
+MergeSort.h
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/MergeSorting/MergeSort.h
+
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/MergeSorting/MergeSort.h
+

@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -g  -shared -Wl,-soname,libsmall.so -o libsmall.so CMakeFiles/small.dir/library.c.o 

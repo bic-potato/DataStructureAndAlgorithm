@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/library.c
+library.h
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/library.h
+stdio.h
+-
+
+/home/zuoxichen/Documents/DataStructureAndAlgorithm/Assignments/dsa2/small/library.h
+
