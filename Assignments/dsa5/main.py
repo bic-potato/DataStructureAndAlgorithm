@@ -1,15 +1,15 @@
-'''
+"""
 Data Structure and Algorithm: Homework 5 Template.
 Version: 3.6
 Date: 2019-04-07
 Note:
     Your homework name must be 'hw5_[student id]_[name].py'.
     e.x: hw5_1700013200_xxx.py
-'''
+"""
 
 
 class Node:
-    def __init__(self, init_data, next=None, last=None):
+    def __init__(self, init_data=None, next=None, last=None):
         self.data = init_data
         self.next = next
         self.last = last
@@ -36,45 +36,97 @@ class Node:
         return 0
 
 
+class HeaderNode(Node):
+    def __init__(self, init_data=None, next=None, last=None):
+        super().__init__(init_data, next, last)
+        self.next = None
+
+    def get_data(self):
+        pass
+
+    def set_data(self, new_data):
+        pass
+
+    def get_last(self):
+        pass
+
+    def get_next(self):
+        pass
+
+    def set_last(self, new_last):
+        pass
+
+
 class UnorderedList:
-    def __init__(self):
-        self.data = Node(None)
-        self.head = self.data.next
-        self.tail = self.data.next
+    def __init__(self, *args):
+        self.__prehead = HeaderNode()
+        self.head = Node()
+        self.prehead.next = self.head
+        self.tail = None
+        for i in args:
+            self.append(i)
 
     def add(self, item):
-        self.tail.next = Node(item)
-        self.tail.next.last = self.tail.
-        self.tail = self.tail.next
+        node = Node(item)
+        node.next = self.head
+        self.head = node
         return 0
 
+    @property
     def size(self):
-        temp = self.data
+        cur = self.head
         count = 0
-        while temp.next() != None:
+        while cur.next is not None:
             count += 1
-            temp = temp.next()
+            cur = cur.next
         return count
 
-    def serach(self, item):
-        # TODO:
-        return
+    def search(self, item):
+        cur = self.head
+        while cur.next is not None:
+            if cur.data == item:
+                return True
+            cur = cur.next
+        return None
 
     def remove(self, item):
-        # TODO:
-        return
+        cur = self.head
+        while cur.next is not None:
+            if cur.next.data == item:
+                cur.next == cur.next.next
+                return 0
+            cur = cur.next
+        return ValueError
 
     def append(self, item):
-        # TODO:
+        node = Node(item)
+        if self.is_empty
         return
 
     def index(self, item):
-        # TODO:
-        return
+        index = 0
+        cur = self.head
+        while cur.next is not None:
+            if cur.data != item:
+                index += 1
+                cur = cur.next
+            else:
+                return index
+        return ValueError
+
+    @property
+    def is_empty(self):
+        if self.size == 0:
+            return True
+        else:
+            return False
 
     def __str__(self):
-        # TODO:
-        return
+        cur = self.data
+        list1 = []
+        while cur.next is not None:
+            list1.append(cur.data)
+        return str(list1)
 
     def __getitem__(self, ind):
         # TODO:
