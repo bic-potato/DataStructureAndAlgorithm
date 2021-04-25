@@ -1,7 +1,8 @@
 from queue import SimpleQueue, Queue
 import random
 
-def  radixSort(list):
+
+def radixSort(list):
     """
     Sort your list.
     :param String list:
@@ -26,7 +27,7 @@ def  radixSort(list):
     return main_queue.queue
 
 
-def passTheParcel(namelist, seed = 0):
+def passTheParcel(namelist, seed=0):
     """
     Hot potato problem.
     :param seed randomseed:
@@ -43,7 +44,6 @@ def passTheParcel(namelist, seed = 0):
             queue.put(queue.get())
         queue.get()
     return queue.get()
-
 
 
 if __name__ == '__main__':
