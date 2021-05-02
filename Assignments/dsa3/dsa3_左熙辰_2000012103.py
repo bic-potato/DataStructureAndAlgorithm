@@ -62,7 +62,7 @@ def isHtmlTagMatch(htmlFile):
             else:
                 stack1.append(temp)
         else:
-            temp +=i
+            temp += i
     if len(stack1) == 0:
         return True
     else:

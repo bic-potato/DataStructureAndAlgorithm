@@ -68,12 +68,14 @@ class UnorderedList:
         node = Node(item)
         if not self.is_empty:
             node.next = self.head
+            self.head.last = node
             self.head = node
         else:
             node.next = self.head
             self.head = node
             self.tail = node
         self.prehead.next = self.head
+        self.head.last = self.prehead
         return 0
 
     def size(self):
@@ -96,7 +98,8 @@ class UnorderedList:
         cur = self.prehead
         while cur.next.next is not None:
             if cur.next.data == item:
-                cur.next == cur.next.next
+                cur.next = cur.next.next
+                cur.next.next.last = cur.next
                 return 0
             cur = cur.next
             self.prehead.next = self.head
@@ -127,7 +130,7 @@ class UnorderedList:
                 cur = cur.next
             else:
                 return index
-        raise IndexError("List Index Out of Range")
+        raise ValueError("Value Not Found")
 
     @property
     def is_empty(self):
@@ -135,13 +138,50 @@ class UnorderedList:
 
     def __str__(self):
         cur = self.prehead
-        list1 = []
-        while cur.next is not None:
+        str1 = "["
+        while cur.next.next is not None:
             cur = cur.next
-            list1.append(cur.data)
-        return str(list1)
+            str1 += f"{cur.data}, "
+        else:
+            str1 += f"{cur.next.data}]"
+        return str1
 
     def __getitem__(self, ind):
+        index = 0
+        cur = self.head
+        if ind < 0:
+            ind += self.size()
+        while cur.next is not None:
+            if index == ind:
+                return cur.data
+            else:
+                index += 1
+                cur = cur.next
+        else:
+            if index == ind:
+                return cur.data
+        raise IndexError("List Index out of Range")
+
+    def pop(self, pos=-1):
+        popout = self[pos]
+        self.remove(self[pos])
+        return popout
+
+    def insert(self, ind, item):
+        node = Node(item)
+        try:
+            pre_node = self.getitem(ind)
+        except IndexError:
+            pre_node = self.getitem(-1)
+        post_node = pre_node.next
+        node.next = post_node
+        pre_node.next = node
+        return None
+
+    def serach(self, item):
+        return self.search(item)
+
+    def getitem(self, ind):
         index = 0
         cur = self.head
         if ind < 0:
@@ -155,24 +195,10 @@ class UnorderedList:
         else:
             if index == ind:
                 return cur
-        raise IndexError
-
-    def pop(self, pos=-1):
-        popout = self[pos].data
-        self.remove(self[pos].data)
-        return popout
-
-    def insert(self, ind, item):
-        node = Node(item)
-        pre_node = self[ind]
-        post_node = pre_node.next
-        node.next = post_node
-        pre_node.next = node
-        return None
+        raise IndexError("List Index out of Range")
 
 
 class OrderedList(UnorderedList):
-
     def add(self, item):
         node = Node(item)
         current = self.prehead
@@ -200,13 +226,16 @@ class OrderedList(UnorderedList):
         high = self.size() - 1
         while low <= high:
             mid = (low + high) // 2
-            if self[mid].data == item:
+            if self[mid] == item:
                 return mid
-            elif self[mid].data > item:
+            elif self[mid] > item:
                 high = mid - 1
             else:
                 low = mid + 1
         raise ValueError
+
+    def serach(self, item):
+        return self.search
 
 
 class Stack:
@@ -268,15 +297,20 @@ def test():
     """
     test_lst = [1, 3, 5, 2, 4]
     unlst = UnorderedList()
+    unlst2 = UnorderedList()
     lst = OrderedList()
     stk = Stack()
     queue = Queue()
     for x in test_lst:
-        unlst.append(x)  # modified: add -> append
+        unlst.append(x) # modified: add -> append
+        unlst2.add(x)
         lst.add(x)
         stk.push(x)
         queue.enqueue(x)
+    print(unlst)
     assert str(unlst) == str(test_lst)
+    print(unlst2)
+    assert str(unlst2) ==str([4, 2, 5, 3, 1])
     print(lst)
     assert str(lst) == str(sorted(test_lst))  # modified: test_lst.sort() -> sorted(test_lst)
     print(stk.size)
@@ -284,10 +318,13 @@ def test():
     assert stk.size == len(test_lst)
     print(queue.size)
     assert queue.size == len(test_lst)
-    print(unlst[-1].data)
+    print(unlst[-1])
     assert stk.pop() == 4
     assert queue.dequeue() == 1
     assert unlst.tail.get_data() == 4
+    unlst.remove(5)
+    print(unlst)
+    # assert str(unlst) == str([1, 3, 5, 2])
 
 
 if __name__ == '__main__':

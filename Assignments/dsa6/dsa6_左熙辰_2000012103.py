@@ -24,22 +24,31 @@ class PascalTriangle():
             self.count += 1
             self.add_num()
 
+def leaf(t):
+    # t.colormode(255) # 随机生成 rgb 色值
+    t.begin_fill()
+    t.fillcolor("green")
+    t.pencolor("green")
+    t.circle(3)
+    t.end_fill()
 
-def tree(branchlen, branchwideth, t, i=6, j=3):
-    i += 3
-    j += 3
-    if branchlen > 2 and branchwideth > 1:
+def tree(branchlen, branchwideth, t):
+    if branchlen > 0 and branchwideth > 0:
         t.pensize(branchwideth)
         t.pencolor("brown")
         t.forward(branchlen)
         t.right(30)
-        tree(branchlen - int(math.log(i)), branchwideth - int(math.log(j)), t)
+        tree(branchlen // math.sqrt(2), branchwideth // math.sqrt(2), t)
         t.left(60)
-        tree(branchlen - int(math.log(i)), branchwideth - int(math.log(j)), t)
+        tree(branchlen // math.sqrt(2), branchwideth // math.sqrt(2), t)
         t.right(30)
         t.penup()
         t.backward(branchlen)
         t.pendown()
+    else:
+        leaf(t)
+
+"""
     elif branchlen > 0 or branchwideth == 1:
         t.pensize(2)
         t.pencolor("green")
@@ -47,6 +56,7 @@ def tree(branchlen, branchwideth, t, i=6, j=3):
         return 0
     else:
         return 0
+"""
 
 
 def pascalTriangle(numofrow):
@@ -57,7 +67,7 @@ def pascalTriangle(numofrow):
 if __name__ == '__main__':
     t = turtle
     branchlen = 100
-    branchwideth = 10
+    branchwideth = 20
     tree(branchlen,branchwideth, t)
     numofrow = 6
     #pascalTriangle(numofrow)
