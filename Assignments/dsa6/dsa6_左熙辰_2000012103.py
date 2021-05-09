@@ -13,6 +13,19 @@ class PascalTriangle():
             self.data[i][-1] = 1
         self.add_num()
 
+    def printdata(self):
+        for i in range(self.row):
+            c = self.row - i - 1
+            print("  " * c, end="")
+            for j in range(len(self.data[i])):
+                if j < len(self.data[i]):
+                    print(str(self.data[i][j]).center(4), end="")
+                else:
+                    print(str(self.data[i][j]).center(4), end="")
+            print()
+
+
+
     def add_num(self):
         col = 0
         if self.count == self.row:
@@ -25,11 +38,10 @@ class PascalTriangle():
             self.add_num()
 
 def leaf(t):
-    # t.colormode(255) # 随机生成 rgb 色值
     t.begin_fill()
     t.fillcolor("green")
     t.pencolor("green")
-    t.circle(3)
+    t.circle(4)
     t.end_fill()
 
 def tree(branchlen, branchwideth, t):
@@ -48,26 +60,62 @@ def tree(branchlen, branchwideth, t):
     else:
         leaf(t)
 
-"""
-    elif branchlen > 0 or branchwideth == 1:
-        t.pensize(2)
-        t.pencolor("green")
-        t.forward(25)
-        return 0
-    else:
-        return 0
-"""
 
+class HibertCurve():
+    def __init__(self, n, len, t = turtle):
+        self.turtle = t
+        self.turtle.seth(0)
+        self.turtle.width(3)
+        self.HelbertX(n, len)
+        self.turtle.done()
+
+    def HelbertX(self, n, len):
+        if n > 0:
+            # 生成列：−LF+RFR+FL−
+            ## ----
+            self.turtle.right(90)
+            self.HelbertY(n - 1, len)
+            self.turtle.forward(len)
+            self.turtle.left(90)
+            self.HelbertX(n - 1, len)
+            self.turtle.forward(len)
+            self.HelbertX(n - 1, len)
+            self.turtle.left(90)
+            self.turtle.forward(len)
+            self.HelbertY(n - 1, len)
+            self.turtle.right(90)
+        else:
+            pass
+        """
+        +RF-LFL-FR+
+        """
+    def HelbertY(self, n, len):
+        if n > 0:
+            self.turtle.left(90)
+            self.HelbertX(n - 1, len)
+            self.turtle.forward(len)
+            self.turtle.right(90)
+            self.HelbertY(n - 1, len)
+            self.turtle.forward(len)
+            self.HelbertY(n - 1, len)
+            self.turtle.right(90)
+            self.turtle.forward(len)
+            self.HelbertX(n - 1, len)
+            self.turtle.left(90)
+        else:
+            pass
 
 def pascalTriangle(numofrow):
     pascaltriangle = PascalTriangle(numofrow)
-    return pascaltriangle.data
+    return pascaltriangle.printdata()
 
 
 if __name__ == '__main__':
-    t = turtle
+    # t = turtle
     branchlen = 100
     branchwideth = 20
-    tree(branchlen,branchwideth, t)
+    # t.seth(90)
+    # tree(branchlen,branchwideth, t)
     numofrow = 6
-    #pascalTriangle(numofrow)
+    pascalTriangle(numofrow)
+    # helbert = HibertCurve(4, 15)
